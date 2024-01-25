@@ -5,8 +5,8 @@ describe('calculateTotal function', () => {
     {
       name: 'case 1: valid discount',
       products: [
-        { name: 'Товар1', quantity: 3 },
-        { name: 'Товар2', quantity: 5 },
+        { name: 'Товар1', quantity: 3, price: 1 },
+        { name: 'Товар2', quantity: 5, price: 1 },
       ],
       discount: 10,
       expected: {
@@ -17,8 +17,8 @@ describe('calculateTotal function', () => {
     {
       name: 'case 2: discount is 0',
       products: [
-        { name: 'Товар1', quantity: 3 },
-        { name: 'Товар2', quantity: 5 },
+        { name: 'Товар1', quantity: 3, price: 1 },
+        { name: 'Товар2', quantity: 5, price: 1 },
       ],
       discount: 0,
       expected: {
@@ -38,8 +38,8 @@ describe('calculateTotal function', () => {
     {
       name: 'case 3: invalid negative discount',
       products: [
-        { name: 'Товар1', quantity: 3 },
-        { name: 'Товар2', quantity: 5 },
+        { name: 'Товар1', quantity: 3, price: 1 },
+        { name: 'Товар2', quantity: 5, price: 1 },
       ],
       discount: -10,
       expectedError: 'Скидка не может быть отрицательным числом.',
@@ -47,8 +47,8 @@ describe('calculateTotal function', () => {
     {
       name: 'case 4: invalid discount over 100%',
       products: [
-        { name: 'Товар1', quantity: 3 },
-        { name: 'Товар2', quantity: 5 },
+        { name: 'Товар1', quantity: 3, price: 1 },
+        { name: 'Товар2', quantity: 5, price: 1 },
       ],
       discount: 110,
       expectedError: 'Скидка не может быть больше 100%.',

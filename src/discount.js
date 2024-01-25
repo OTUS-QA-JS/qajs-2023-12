@@ -10,7 +10,7 @@ export function calculateTotal(products, discount) {
 
   // Рассчитываем сумму товаров без скидки и с учётом скидки
   const totalWithoutDiscount = products.reduce(
-    (acc, product) => acc + product.quantity,
+    (acc, product) => acc + product.quantity * product.price,
     0,
   )
   const totalWithDiscount = totalWithoutDiscount * (1 - discount / 100)
