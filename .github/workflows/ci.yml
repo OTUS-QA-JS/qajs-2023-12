@@ -1,6 +1,6 @@
 name: CI
 
-on: [push, pull_request]
+on: [push]
 
 env:
   TEST_USER_ID: ${{ vars.TEST_USER_ID }}
@@ -43,4 +43,5 @@ jobs:
           node-version: 20.11.0
           cache: 'npm'
       - run: npm ci
+      - run: cp .env.example .env
       - run: npm test
