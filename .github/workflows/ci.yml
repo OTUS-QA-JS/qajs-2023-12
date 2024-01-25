@@ -2,6 +2,12 @@ name: CI
 
 on: [push, pull_request]
 
+env:
+  TEST_USER_ID: ${{ vars.TEST_USER_ID }}
+  TEST_USERNAME: ${{ vars.TEST_USERNAME }}
+  TEST_PASSWORD: ${{ vars.TEST_PASSWORD }}
+  TEST_BASE_API_URL: ${{ vars.TEST_BASE_API_URL }}
+
 jobs:
   eslint:
     runs-on: ubuntu-latest
