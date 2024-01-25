@@ -29,28 +29,31 @@ const getUserName = ({ name = 'Аноним' } = {}) => {
   return name
 }
 console.log('teacher.name', getUserName(teacher))
-console.log('{ id: 101 }.name', getUserName({ }))
-console.log('{}.name', getUserName({ }))
+console.log('{ id: 101 }.name', getUserName({}))
+console.log('{}.name', getUserName({}))
 console.log('undefined', getUserName())
 
 // деструктуризация
 const [firstUser, ...alsoUsers] = users
-const { name = 'Аноним', otherField = 'default value', ...userFields } = firstUser
+const {
+  name = 'Аноним',
+  otherField = 'default value',
+  ...userFields
+} = firstUser
 console.log('{ name, otherField }', {
   name,
-  otherField
+  otherField,
 })
 console.log('userFields', userFields)
 
 console.log('alsoUsers', alsoUsers)
-
 
 /**
  * Это только для примера
  */
 ;(async () => {
   const request = () => {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       setTimeout(() => {
         resolve({ data: [] })
       }, 100)
@@ -64,10 +67,11 @@ console.log('alsoUsers', alsoUsers)
 /**
  * Как это выглядело бы у нас в тесте
  */
+// eslint-disable-next-line jest/no-commented-out-tests
 // describe('Книги', () => {
+// eslint-disable-next-line jest/no-commented-out-tests
 //   it('Список книг', async () => {
 //     const response = await axios.get('http://somesite.com/api/book')
 //     expect(response.status).toBe(200)
 //   })
 // })
-
