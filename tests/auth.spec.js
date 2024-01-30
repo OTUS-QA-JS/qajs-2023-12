@@ -1,11 +1,5 @@
 import axios from 'axios'
-
-const config = {
-  baseURL: process.env.TEST_BASE_API_URL,
-  userId: process.env.TEST_USER_ID,
-  username: process.env.TEST_USERNAME,
-  password: process.env.TEST_PASSWORD,
-}
+import { config } from '../framework'
 
 const client = axios.create({
   baseURL: config.baseURL,
