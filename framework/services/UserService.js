@@ -1,10 +1,4 @@
-import axios from 'axios'
-import { config } from '../config'
-
-const client = axios.create({
-  baseURL: config.baseURL,
-  validateStatus: () => true,
-})
+import client from './client'
 
 const getUser = async ({ userId, token }) => {
   const response = await client.get(`/Account/v1/User/${userId}`, {
