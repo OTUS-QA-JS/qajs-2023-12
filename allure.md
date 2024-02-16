@@ -65,7 +65,7 @@ npx allure serve allure-results
 Собрать отчёт:
 
 ```bash
-npx allure build allure-results
+npx allure generate allure-results --clean
 ```
 
 Посмотреть собранный отчёт:
