@@ -7,7 +7,7 @@
 const config = {
   testEnvironment: 'allure-jest/node',
   setupFiles: ['dotenv/config'],
-  verbose: true,
+  verbose: process.env.CI !== 'true',
 }
 
 module.exports = config
