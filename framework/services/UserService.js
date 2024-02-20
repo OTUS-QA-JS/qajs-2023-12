@@ -1,4 +1,5 @@
 import client from './client'
+import TelegramService from './TelegramService'
 
 const getUser = async ({ userId, token }) => {
   const response = await client.get(`/Account/v1/User/${userId}`, {
@@ -19,6 +20,18 @@ const createUser = async ({ userName, password }) => {
     userName,
     password,
   })
+
+  /**
+   * ВАЖНО! Это сделано для примера отправки уведомлений в телеграм из тестов..
+   * Отправять что-то из тестов куда-то не рекоммендую,
+   * кроме тех случаев, когда это мб вам необходимо
+   */
+  await TelegramService.sendMessage(
+    `Создан новый пользователь: \r\n` +
+      `username: ${userName} \r\n` +
+      `password: ${password} \r\n` +
+      `userId: ${response.data.userID}`,
+  )
 
   return {
     headers: response.headers,
