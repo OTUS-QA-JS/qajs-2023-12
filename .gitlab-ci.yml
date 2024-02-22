@@ -1,0 +1,29 @@
+stages:
+  - lint
+  - test
+  - notify
+
+eslint:
+  stage: lint
+  image: node:20.11.0
+  script:
+    - npm ci
+    - npm run lint
+
+prettier:
+  stage: lint
+  image: node:20.11.0
+  script:
+    - npm ci
+    - npm run format
+
+test:
+  stage: test
+  image: node:20.11.0
+  script:
+    - npm ci
+    - cp .env.example .env
+    - npm run test:ci
+  artifacts:
+    paths:
+      - allure-report/
