@@ -1,7 +1,7 @@
 stages:
   - lint
   - test
-  - notify
+  - report
 
 eslint:
   stage: lint
@@ -24,6 +24,13 @@ test:
     - npm ci
     - cp .env.example .env
     - npm run test:ci
+
+allure:
+  stage: report
+  image: registry.gitlab.com/freepad/qajs-2023-12/allure:latest
+  script:
+    - cd /app
+    - npx allure generate allure-results --clean
   artifacts:
     paths:
-      - allure-report/
+      - allure-report
