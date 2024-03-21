@@ -35,23 +35,4 @@ class TokenService {
   }
 }
 
-// для проверки работы :)
-// const tokenService = new TokenService()
-//
-// tokenService.get({
-//   userName: config.username,
-//   password: config.password,
-// })
-//   .then(token => {
-//     console.log('token1', token)
-//   })
-//
-// tokenService.get({
-//   userName: config.username,
-//   password: config.password,
-// })
-//   .then(token => {
-//     console.log('token2', token)
-//   })
-
 export default new TokenService()
