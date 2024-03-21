@@ -1,5 +1,4 @@
 import { AuthService } from './index'
-import { config } from '../config'
 
 class TokenService {
   #cache = new Map()
