@@ -3,11 +3,11 @@ import { AuthService } from './index'
 class TokenService {
   #cache = new Map()
 
-  #generateKey (data) {
+  #generateKey(data) {
     return JSON.stringify(data)
   }
 
-  async get (credentials) {
+  async get(credentials) {
     const key = this.#generateKey()
     if (!this.#cache.has(key)) {
       this.#cache.set(key, AuthService.generateToken(credentials))
@@ -25,11 +25,11 @@ class TokenService {
     }
   }
 
-  delete (credentials) {
+  delete(credentials) {
     this.#cache.delete(this.#generateKey(credentials))
   }
 
-  clear () {
+  clear() {
     this.#cache.clear()
   }
 }
