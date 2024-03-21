@@ -1,47 +1,57 @@
 import { AuthService } from './index'
 import { config } from '../config'
 
-const cache = new Map()
+class TokenService {
+  #cache = new Map()
 
-const getFromCache = async (credentials) => {
-  const key = JSON.stringify(credentials)
-  if (!cache.has(key)) {
-    cache.set(key, AuthService.generateToken(credentials))
+  #generateKey (data) {
+    return JSON.stringify(data)
   }
-  try {
-    const response = await cache.get(key)
-    if (!response.data.token) {
-      throw new Error('Token is empty')
+
+  async get (credentials) {
+    const key = this.#generateKey()
+    if (!this.#cache.has(key)) {
+      this.#cache.set(key, AuthService.generateToken(credentials))
     }
+    try {
+      const response = await this.#cache.get(key)
+      if (!response.data.token) {
+        throw new Error('Token is empty')
+      }
 
-    return response.data.token
-  } catch (error) {
-    cache.delete(key)
-    throw error
+      return response.data.token
+    } catch (error) {
+      this.#cache.delete(key)
+      throw error
+    }
+  }
+
+  delete (credentials) {
+    this.#cache.delete(this.#generateKey(credentials))
+  }
+
+  clear () {
+    this.#cache.clear()
   }
 }
 
-getFromCache({
-  userName: config.username,
-  password: config.password,
-})
-  .then(token => {
-    console.log('token1', token)
-  })
+// для проверки работы :)
+// const tokenService = new TokenService()
+//
+// tokenService.get({
+//   userName: config.username,
+//   password: config.password,
+// })
+//   .then(token => {
+//     console.log('token1', token)
+//   })
+//
+// tokenService.get({
+//   userName: config.username,
+//   password: config.password,
+// })
+//   .then(token => {
+//     console.log('token2', token)
+//   })
 
-getFromCache({
-  userName: config.username,
-  password: config.password,
-})
-  .then(token => {
-    console.log('token2', token)
-  })
-
-const clearCache = () => {
-  cache.clear()
-}
-
-export default {
-  get: getFromCache,
-  clear: clearCache,
-}
+export default new TokenService()

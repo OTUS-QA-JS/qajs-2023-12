@@ -2,7 +2,6 @@ import { config } from '../config'
 
 export default class AuthService {
   static async generateToken({ userName, password }) {
-    console.log('generateToken', userName, password)
     const response = await fetch(`${config.baseURL}/Account/v1/GenerateToken`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
