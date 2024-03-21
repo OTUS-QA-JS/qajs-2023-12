@@ -1,34 +1,31 @@
 import { config } from '../config'
 
-const generateToken = async ({ userName, password }) => {
-  const response = await fetch(`${config.baseURL}/Account/v1/GenerateToken`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ userName, password }),
-  })
+export default class AuthService {
+  static async generateToken({ userName, password }) {
+    const response = await fetch(`${config.baseURL}/Account/v1/GenerateToken`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userName, password }),
+    })
 
-  return {
-    headers: response.headers,
-    status: response.status,
-    data: await response.json(),
+    return {
+      headers: response.headers,
+      status: response.status,
+      data: await response.json(),
+    }
   }
-}
 
-const authorized = async ({ userName, password }) => {
-  const response = await fetch(`${config.baseURL}/Account/v1/Authorized`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ userName, password }),
-  })
+  static async authorized({ userName, password }) {
+    const response = await fetch(`${config.baseURL}/Account/v1/Authorized`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userName, password }),
+    })
 
-  return {
-    headers: response.headers,
-    status: response.status,
-    data: await response.json(),
+    return {
+      headers: response.headers,
+      status: response.status,
+      data: await response.json(),
+    }
   }
-}
-
-export default {
-  generateToken,
-  authorized,
 }
