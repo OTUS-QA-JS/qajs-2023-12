@@ -23,7 +23,10 @@ module.exports = {
       },
     },
     {
-      files: ['cypress/e2e/**/*.{cy,spec}.{js,ts,jsx,tsx}'],
+      files: [
+        'cypress/e2e/**/*.{cy,spec}.{js,ts,jsx,tsx}',
+        'cypress/support/**/*',
+      ],
       extends: ['plugin:cypress/recommended'],
     },
   ],

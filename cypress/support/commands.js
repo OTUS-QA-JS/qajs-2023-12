@@ -1,3 +1,5 @@
+/// <reference types="Cypress" />
+
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
@@ -7,19 +9,25 @@
 // commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+import '@testing-library/cypress/add-commands'
+import { ROUTES } from './constans'
+
+Cypress.Commands.add('login', (email, password, username = 'plumrx') => {
+  cy.fixture('user.json').then(authResponse => {
+    authResponse.user.username = username
+    cy.intercept('POST', /users\/login$/, {
+      statusCode: 200,
+      body: authResponse,
+    })
+  })
+
+  // click sign in button in home page
+  cy.visit(ROUTES.LOGIN)
+
+  cy.get('[type="email"]').type(email)
+  cy.get('[type="password"]').type(password)
+  cy.get('[type="submit"]').contains('Sign in').click()
+
+  cy.url().should('match', /#\/$/)
+})
