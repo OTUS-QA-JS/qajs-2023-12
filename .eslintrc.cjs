@@ -2,10 +2,8 @@ module.exports = {
   env: {
     es2021: true,
     node: true,
-    'jest/globals': true,
   },
-  plugins: ['jest'],
-  extends: ['standard', 'plugin:jest/recommended', 'prettier'],
+  extends: ['standard', 'prettier'],
   overrides: [
     {
       env: {
@@ -15,6 +13,18 @@ module.exports = {
       parserOptions: {
         sourceType: 'script',
       },
+    },
+    {
+      files: ['tests/**/*.test.js'],
+      plugins: ['jest'],
+      extends: ['plugin:jest/recommended'],
+      env: {
+        jest: true,
+      },
+    },
+    {
+      files: ['cypress/e2e/**/*.{cy,spec}.{js,ts,jsx,tsx}'],
+      extends: ['plugin:cypress/recommended'],
     },
   ],
   parserOptions: {
