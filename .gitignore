@@ -5,3 +5,11 @@ coverage
 .env
 allure-report
 allure-results
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
